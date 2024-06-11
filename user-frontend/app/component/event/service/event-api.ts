@@ -14,3 +14,13 @@ export const saveEventAPI = async (event:IEvent) => {
         return error
     }
 }
+export const findEventByIdAPI = async (id:number) => {
+    try {
+        const response = await instance().get(`/calendars/detail`, {params: {id}})
+        return response.data
+    } catch (error) {
+
+        console.log(error)
+        return error
+    }
+}

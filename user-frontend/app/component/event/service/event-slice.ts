@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { IEvent } from "../model/event"
-import { SaveEvent } from "./event-service"
+import { SaveEvent, findEventById } from "./event-service"
 
 const paymentThunks = []
 const status = {
@@ -35,12 +35,14 @@ export const eventSlice = createSlice({
         const {pending, rejected} = status;
 
         // builder.addCase(findAllBoards.fulfilled, handleFulfilled)
-        builder.addCase(SaveEvent.fulfilled, (state: any, {payload}: any)=>{state.message= payload})
+        builder
+               .addCase(SaveEvent.fulfilled, (state: any, {payload}: any)=>{state.message= payload})
+               .addCase(findEventById, (state: any, { payload }: any) => { state.json = payload })
         
     }
 })
 
 export const  getauth  = (state: any) => state.event.auth;
-
+export const getEventById = (state: any) => (state.article.json)
 export const {} = eventSlice.actions
 export default eventSlice.reducer;

@@ -10,6 +10,8 @@ import site.toeicdoit.api.calendar.service.CalendarService;
 import site.toeicdoit.api.calendar.service.CalendarServiceImpl;
 import site.toeicdoit.api.common.component.MessengerVo;
 
+import java.util.Optional;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 @RestController
@@ -22,5 +24,10 @@ public class CalendarController {
     public ResponseEntity<MessengerVo> save(@RequestBody CalendarDto dto) {
         log.info("CalendarDto save con: {}", dto);
         return ResponseEntity.ok(calendarService.save(dto));
+    }
+    @GetMapping("/detail")
+    public ResponseEntity<Optional<CalendarDto>> findById(@RequestParam("id") Long id) {
+        log.info("ArticleModel findById con: {}", id);
+        return ResponseEntity.ok(calendarService.findById(id));
     }
 }

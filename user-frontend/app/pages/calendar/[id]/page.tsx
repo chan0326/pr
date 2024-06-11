@@ -12,16 +12,13 @@ import { IUser } from '@/app/component/user/model/user'
 import { getUserById } from '@/app/component/user/service/user-slice'
 import { findUserById } from '@/app/component/user/service/user-service'
 import { IEvent } from '@/app/component/event/model/event'
-import { Save } from '@mui/icons-material'
-import { SaveEvent } from '@/app/component/event/service/event-service'
-
-
-
+import { SaveEvent, findEventById } from '@/app/component/event/service/event-service'
+import { getEventById } from '@/app/component/event/service/event-slice'
+import { stringify } from 'querystring'
 
 export default function Calendar({ params }: any) {
   const dispatch = useDispatch();
-  const user: IUser = useSelector(getUserById);
-
+  const getEvent: IEvent[] = useSelector(getEventById); // 이벤트 배열로 가정
 
   const [events, setEvents] = useState([
     { title: 'event 1', id: '1' },
@@ -31,7 +28,6 @@ export default function Calendar({ params }: any) {
     { title: 'event 5', id: '5' },
   ])
   const [allEvents, setAllEvents] = useState<IEvent[]>([])
-  const [sentEvents, setSentEvents] = useState({}as IEvent)
   const [showModal, setShowModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [idToDelete, setIdToDelete] = useState<number | null>(null)
@@ -43,12 +39,7 @@ export default function Calendar({ params }: any) {
     userId: params.id
   })
 
-  useEffect(() => {
-    console.log('params.id:', params.id);
-    dispatch(findUserById(params.id));
-  }, [dispatch, params.id]);
-
-
+  
 
   // 드래그 이벤트 설정
   useEffect(() => {
@@ -64,11 +55,21 @@ export default function Calendar({ params }: any) {
         }
       })
     }
-  }, [])
-  
+    dispatch(findEventById(params.id));
+  }, [getEvent])
+
+  // 저장된 이벤트가 업데이트되면 allEvents에 설정
+  useEffect(() => {
+    console.log('getEvent:', getEvent);
+
+    if (true) {
+      console.log('getEvent 출력성공:', getEvent);
+      setAllEvents(getEvent);
+    }
+  }, [getEvent]);
 
   function handleDateClick(arg: { date: Date, allDay: boolean }) {
-    setNewEvent({ ...newEvent, start: arg.date, allDay: arg.allDay, id: new Date().getTime() })
+    setNewEvent({ ...newEvent, start: arg.date.toISOString(), allDay: arg.allDay, id: new Date().getTime() })
     setShowModal(true)
   }
 
@@ -110,20 +111,16 @@ export default function Calendar({ params }: any) {
 
   const handleSave = () => {
     console.log('allEvents:', allEvents);
-    setAllEvents(allEvents)
     allEvents.map((event) => {
       console.log('event:', event);
       dispatch(SaveEvent(event))
-    .then((res: any) => {
-      alert('캘린더 저장완료')
-      console.log(res.payload.id)
-    }).catch((err: any) => {
-      console.log("실패")
-    });
+      .then((res: any) => {
+        alert('캘린더 저장완료')
+        console.log(res.payload.id)
+      }).catch((err: any) => {
+        console.log("실패")
+      });
     })
-
-    
-    
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

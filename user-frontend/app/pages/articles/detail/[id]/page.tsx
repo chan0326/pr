@@ -19,7 +19,6 @@ export default function ArticleDetailPage({ params }: any) {
     alert("삭제완료")
     dispatch(articleDeleteById(params.id))
   }
-
   const update = () => {
     setArticle({ ...article, id: params.id })
     console.log("수정완료")

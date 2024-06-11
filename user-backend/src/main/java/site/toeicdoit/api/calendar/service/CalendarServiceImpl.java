@@ -51,7 +51,8 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public Optional<CalendarDto> findById(Long id) {
-        return Optional.empty();
+        log.info("CalendarDto findById Impl: {}", id);
+        return repo.findById(id).map(i -> entityToDto(i));
     }
 
     @Override
