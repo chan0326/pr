@@ -59,6 +59,7 @@ function ReferenceHeader() {
         <div className="flex px-4 py-3 float-end">
           <span className="block text-sm text-gray-900 dark:text-white"><a href="#">강의실 입장</a></span>
           <span className="block text-sm  text-gray-500 truncate dark:text-gray-400 mx-5"><a href={`${PG.USER}/detail/${1}`}>마이페이지</a></span>
+          <span className="block text-sm  text-gray-500 truncate dark:text-gray-400 mx-5"><a href={`${PG.Calendar}/detail/${1}`}>캘린더</a></span>
           <span onClick={logoutHandler} className="block text-sm  text-gray-500 truncate dark:text-gray-400"> <a href='#'>Logout</a></span>
         </div>
       }

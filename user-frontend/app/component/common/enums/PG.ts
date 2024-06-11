@@ -1,3 +1,5 @@
+import Calendar from "@/app/pages/calendar/[id]/page";
+
 export const enum PG {
     HOME='/',
     ARTICLE='/pages/articles',
@@ -5,5 +7,6 @@ export const enum PG {
     BOARD='/pages/boards',
     DEMO='/pages/demos',
     COUNT='/pages/counter',
-    PAYMENT='/pages/product'
+    PAYMENT='/pages/product',
+    Calendar='/pages/calendar'
 }

@@ -19,6 +19,7 @@ export default function Payment({ params }: any) {
 
 
   useEffect(() => {
+    console.log('params.id:', params.id);
     dispatch(findUserById(params.id));
   }, [dispatch, params.id]);
 

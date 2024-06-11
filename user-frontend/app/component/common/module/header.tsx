@@ -73,6 +73,7 @@ function Header() {
               <Button color="inherit" href="#">강의실 입장</Button>
               <Button color="inherit" href={`${PG.USER}/detail/${jwtDecode<any>(parseCookies().accessToken).userId}`}>마이페이지</Button>
               <Button color="inherit" href={`${PG.PAYMENT}/${jwtDecode<any>(parseCookies().accessToken).userId}`}>Payment</Button>
+              <Button color="inherit" href={`${PG.Calendar}/${jwtDecode<any>(parseCookies().accessToken).userId}`}>캘린더</Button>
               <Button color="inherit" onClick={logoutHandler}>Logout</Button>
             </>
           )}

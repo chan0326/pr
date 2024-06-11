@@ -12,6 +12,7 @@ public interface PaymentService {
                 .status(dto.getStatus())
                 .amount(dto.getAmount())
                 .paymentUid(dto.getPaymentUid())
+                .userId(dto.getUserId())
                 .build();
     }
 

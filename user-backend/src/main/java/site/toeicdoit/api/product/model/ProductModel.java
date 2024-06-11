@@ -22,5 +22,6 @@ public class ProductModel {
     private String description;
     private Long userId;
     private Long subscribeDate;
+    private String regDate;
 
 }

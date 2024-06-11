@@ -36,6 +36,7 @@ public class JwtProvider {
                 .claim("username", dto.getUsername())
                 .claim("job", dto.getJob())
                 .claim("userId", dto.getId())
+                .claim("subscribe", dto.getSubscribe())
                 .compact();
         log.info("createToken: " + accessToken);
 

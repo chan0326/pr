@@ -1,6 +1,7 @@
 package site.toeicdoit.api.user.model;
 
 import site.toeicdoit.api.article.model.ArticleModel;
+import site.toeicdoit.api.calendar.model.CalendarModel;
 import site.toeicdoit.api.common.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,7 @@ public class UserModel extends BaseEntity {
     private String phone;
     private String job;
     private String accessToken;
+    private String email;
     @Setter
     private Long subscribe = 0L;
     @Setter
@@ -32,5 +34,8 @@ public class UserModel extends BaseEntity {
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
     private List<ArticleModel> articles;
+
+    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<CalendarModel> calendars;
 
 }
