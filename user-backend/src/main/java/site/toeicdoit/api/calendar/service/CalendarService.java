@@ -6,6 +6,8 @@ import site.toeicdoit.api.common.service.CommandService;
 import site.toeicdoit.api.common.service.QueryService;
 import site.toeicdoit.api.user.model.UserModel;
 
+import java.util.List;
+
 public interface CalendarService extends CommandService<CalendarDto> , QueryService<CalendarDto> {
 
     default CalendarDto entityToDto(CalendarModel entity){
@@ -26,4 +28,6 @@ public interface CalendarService extends CommandService<CalendarDto> , QueryServ
                 .userId(UserModel.builder().id(dto.getUserId()).build())
                 .build();
     }
+
+    List<CalendarDto> getCalendarByUserId(Long userId);
 }

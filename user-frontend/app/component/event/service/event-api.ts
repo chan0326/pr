@@ -16,7 +16,8 @@ export const saveEventAPI = async (event:IEvent) => {
 }
 export const findEventByIdAPI = async (id:number) => {
     try {
-        const response = await instance().get(`/calendars/detail`, {params: {id}})
+        const response = await instance().get(`/calendars/list`, {params: {id}})
+        console.log("response findEventByIdAPI : "+ response.data)
         return response.data
     } catch (error) {
 

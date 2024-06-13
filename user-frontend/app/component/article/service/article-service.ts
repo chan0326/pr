@@ -8,6 +8,7 @@ export const findAllArticles: any = createAsyncThunk(
     async (id: number) => {
         console.log('service findAllArticlesByBoard id:' + id)
         const data: any = await findAllArticlesAPI(id);
+        console.log('service findAllArticlesByBoard data:' + data)
         return data
     }
 )

@@ -14,6 +14,7 @@ export const SaveEvent: any = createAsyncThunk('/event/SaveEvent',
         async (id: number) => {
             console.log('findEventById request id:' + id)
             const data: any = await findEventByIdAPI(id);
+            console.log('findEventById data:' + data)
             return data
         }
     )

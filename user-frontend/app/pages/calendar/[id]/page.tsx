@@ -8,17 +8,15 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import { EventSourceInput } from '@fullcalendar/core/index.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { IUser } from '@/app/component/user/model/user'
-import { getUserById } from '@/app/component/user/service/user-slice'
-import { findUserById } from '@/app/component/user/service/user-service'
 import { IEvent } from '@/app/component/event/model/event'
 import { SaveEvent, findEventById } from '@/app/component/event/service/event-service'
 import { getEventById } from '@/app/component/event/service/event-slice'
-import { stringify } from 'querystring'
+import { get } from 'http'
+import { NextPage } from 'next'
 
-export default function Calendar({ params }: any) {
+const CalendarPAge: NextPage = ({ params }: any)  => {
   const dispatch = useDispatch();
-  const getEvent: IEvent[] = useSelector(getEventById); // 이벤트 배열로 가정
+  const getEvent: IEvent[] = useSelector(getEventById); 
 
   const [events, setEvents] = useState([
     { title: 'event 1', id: '1' },
@@ -28,8 +26,8 @@ export default function Calendar({ params }: any) {
     { title: 'event 5', id: '5' },
   ])
   const [allEvents, setAllEvents] = useState<IEvent[]>([])
-  const [showModal, setShowModal] = useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showModal, setShowModal] = useState(false) 
+  const [showDeleteModal, setShowDeleteModal] = useState(false) 
   const [idToDelete, setIdToDelete] = useState<number | null>(null)
   const [newEvent, setNewEvent] = useState<IEvent>({
     title: '',
@@ -37,7 +35,7 @@ export default function Calendar({ params }: any) {
     allDay: false,
     id: 0,
     userId: params.id
-  })
+  }) 
 
   
 
@@ -56,17 +54,17 @@ export default function Calendar({ params }: any) {
       })
     }
     dispatch(findEventById(params.id));
+    
   }, [getEvent])
-
-  // 저장된 이벤트가 업데이트되면 allEvents에 설정
-  useEffect(() => {
-    console.log('getEvent:', getEvent);
+  console.log('getEvent:', getEvent);
 
     if (true) {
       console.log('getEvent 출력성공:', getEvent);
-      setAllEvents(getEvent);
+      
+      // setAllEvents([...allEvents,  ]);
     }
-  }, [getEvent]);
+
+
 
   function handleDateClick(arg: { date: Date, allDay: boolean }) {
     setNewEvent({ ...newEvent, start: arg.date.toISOString(), allDay: arg.allDay, id: new Date().getTime() })
@@ -100,7 +98,7 @@ export default function Calendar({ params }: any) {
     })
     setShowDeleteModal(false)
     setIdToDelete(null)
-  }
+  } 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNewEvent({
@@ -138,9 +136,6 @@ export default function Calendar({ params }: any) {
 
   return (
     <>
-      <nav className="flex justify-between mb-12 border-b border-violet-100 p-4">
-        <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
-      </nav>
       <nav className="flex justify-between mb-12 border-b border-violet-100 p-4">
         <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
         <button 
@@ -256,7 +251,7 @@ export default function Calendar({ params }: any) {
           </Dialog>
         </Transition.Root>
         <Transition.Root show={showModal} as={Fragment}>
-          <Dialog as="div" className="relative z-10" onClose={setShowModal}>
+          <Dialog as="div" className="relative z-10" onClose={setShowModal}> 
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -328,3 +323,5 @@ export default function Calendar({ params }: any) {
     </>
   )
 }
+
+export default CalendarPAge

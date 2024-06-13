@@ -64,4 +64,9 @@ public class CalendarServiceImpl implements CalendarService{
     public Boolean existsById(Long id) {
         return null;
     }
+
+    @Override
+    public List<CalendarDto> getCalendarByUserId(Long userId) {
+        return repo.getCalendarByUserId(userId).stream().map(i -> entityToDto(i)).peek(System.out::println).toList();
+    }
 }

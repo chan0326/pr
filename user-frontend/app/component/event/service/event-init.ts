@@ -5,5 +5,7 @@ export const initialState:IEvent = {
     title: '',
     start: '',
     allDay: false,
-    userId: 0
+    userId: 0,
+    array: [],
+    json:{}
 }

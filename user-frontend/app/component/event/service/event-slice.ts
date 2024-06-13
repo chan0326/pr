@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { IEvent } from "../model/event"
 import { SaveEvent, findEventById } from "./event-service"
+import { initialState } from "./event-init"
 
-const paymentThunks = []
 const status = {
     pending:'pending',
     fullfilled : 'fullfilled',
@@ -11,21 +11,9 @@ const status = {
 const handleFulfilled =  (state: any, {payload}: any) => {
     state.array = payload
 }
-interface paymentState{
-    array? : Array<IEvent>,
-    json? : IEvent,
-    auth?: IAuth
-}
-interface IAuth{
-    message?: string,
-    token?: string
-}
-export const initialState:paymentState = {
-    json : {} as IEvent,
-    array : [],
-    auth: {} as IAuth
 
-}
+
+
 
 export const eventSlice = createSlice({
     name: "events",
@@ -43,6 +31,7 @@ export const eventSlice = createSlice({
 })
 
 export const  getauth  = (state: any) => state.event.auth;
-export const getEventById = (state: any) => (state.article.json)
+export const getEventById = (state: any) => state.event;
+
 export const {} = eventSlice.actions
 export default eventSlice.reducer;
